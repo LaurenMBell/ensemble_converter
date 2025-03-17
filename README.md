@@ -7,11 +7,10 @@ To install this package, use this command: python3 -m pip install --index-url ht
 
 ------------------------------------------------------------------------
 
-I used this tutorial for making the base package: https://packaging.python.org/en/latest/tutorials/packaging-projects/
+Tutorials I referenced: 
 
-I use this one for implementing a better package structure: 
-https://realpython.com/python-modules-packages/
+for making the basic package: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 
-And these two for figuring out pytest: 
-https://docs.pytest.org/en/stable/
-https://www.geeksforgeeks.org/getting-started-with-pytest/
+for implementing a better package structure: https://realpython.com/python-modules-packages/
+
+for figuring out pytest: https://docs.pytest.org/en/stable/ , https://www.geeksforgeeks.org/getting-started-with-pytest/
