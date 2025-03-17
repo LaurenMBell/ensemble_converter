@@ -4,8 +4,9 @@ from biomart import BiomartServer
 class EnsemblConverter:
     #initialize the class attributes
     def __init__(self):
-        self.server = BiomartServer("http://www.ensembl.org/biomart")
+        self.server = BiomartServer("http://www.biomart.org/biomart")
         self.ensembl = self.server.datasets['hsapiens_gene_ensembl']
+        self.server.verbose = True
         self.cache = {}
     
     #return one ID's symbol
@@ -15,7 +16,7 @@ class EnsemblConverter:
             return self.cache[ensembl_id]
         
         #if not, get it from the API
-        results = self.ensembl.query(
+        results = self.ensembl.search(
             attributes=['ensembl_gene_id', 'hgnc_symbol'],
             filters={'ensembl_gene_id': ensembl_id}
         )
