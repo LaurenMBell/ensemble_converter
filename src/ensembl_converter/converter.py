@@ -4,7 +4,7 @@ from biomart import BiomartServer
 class EnsemblConverter:
     #initialize the class attributes
     def __init__(self):
-        self.server = BiomartServer("http://www.biomart.org/biomart")
+        self.server = BiomartServer("http://www.ensembl.org/biomart/martservice")
         self.ensembl = self.server.datasets['hsapiens_gene_ensembl']
         self.server.verbose = True
         self.cache = {}
@@ -16,11 +16,12 @@ class EnsemblConverter:
             return self.cache[ensembl_id]
         
         #if not, get it from the API
-        results = self.ensembl.search(
-            attributes=['ensembl_gene_id', 'hgnc_symbol'],
-            filters={'ensembl_gene_id': ensembl_id}
-        )
+        results = self.ensembl.search({
+            'filters': {'ensembl_gene_id': ensembl_id},
+            'attributes': ['ensembl_gene_id', 'hgnc_symbol']
+        })
         
+        results = results.text
         for line in results.splitlines():
             fields = line.split('\t')
             if len(fields) == 2 and fields[1]:
@@ -53,12 +54,13 @@ class EnsemblConverter:
         if addit_data is None:
             addit_data = []
 
-        results = self.ensembl.query(
-            attributes=['ensembl_gene_id', 'hgnc_symbol'] + addit_data,
-            filters={'ensembl_gene_id': ensembl_ids}
-        )
+        results = self.ensembl.search({
+            'filters': {'ensembl_gene_id': ','.join(ensembl_ids)},
+            'attributes': ['ensembl_gene_id', 'hgnc_symbol'] + addit_data
+        })
         
         data = []
+        results = results.text
         for line in results.splitlines():
             fields = line.split("\t")
             if len(fields) >= 2:
