@@ -11,8 +11,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-license = "MIT"
-license-files = ["LICEN[CS]E*"]
+license = {text = "MIT"}
 
 [project.urls]
-Homepage = "blah balh balh put something here"
+Homepage = "https://github.com/LaurenMBell/ensemble_converter/tree/main/src"
